@@ -19,7 +19,7 @@
     ```
        brew install mkcert
        mkcert -install
-       mkcert -cert-file .venv/cert.pem -key-file .venv/key.pem dev.stylegeni.us 127.0.0.1
+       mkcert -cert-file .venv/cert.pem -key-file .venv/key.pem dev.stylegeni.us localhost 127.0.0.1
     ```
  5. Create your .env file:
     ```

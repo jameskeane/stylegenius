@@ -40,13 +40,13 @@ def authorization_header(request):
 
 def known_shop_required(func):
     def wrapper(*args, **kwargs):
-        request = args[1]
+        request = args[0]
         try:
             check_shop_domain(request, kwargs)
             check_shop_known(request, kwargs)
 
             return func(*args, **kwargs)
-        except:
+        except ValueError as e:
             return redirect(reverse("login"))
 
     return wrapper
@@ -61,6 +61,7 @@ def check_shop_known(request, kwargs):
 
 
 def latest_access_scopes_required(func):
+    # todo: this should redirect to refresh access scopes
     def wrapper(*args, **kwargs):
         shop = kwargs.get("shop")
 

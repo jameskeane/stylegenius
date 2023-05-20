@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import {Provider, Loading} from '@shopify/app-bridge-react';
+import {AppProvider, Card} from '@shopify/polaris';
+import '@shopify/polaris/build/esm/styles.css';
 
 function App() {
+  const appConfig = JSON.parse(document.getElementById('app-config').textContent);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <AppProvider>
+        <Provider config={appConfig}>
+          <Loading />
+          <Card title="StyleGenius" sectioned>
+            <p>View a summary of your online store’s performance.</p>
+          </Card>
+        </Provider>
+      </AppProvider>
+    );
 }
 
 export default App;

@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('shopify/', include('shopify_app.urls')),
     path('api/', include('api.urls')),
-    re_path(r'', reactapp.loader),
+    re_path(r'', reactapp.loader, name='root_path'),
 ]

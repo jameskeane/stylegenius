@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-!-_op%hx_fy+&-n-m4@owox=tgiefjdq0vvki5wb9!40_9wp0%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['dev.stylegeni.us']
+ALLOWED_HOSTS = ['dev.stylegeni.us', 'localhost']
 
 
 # Application definition
