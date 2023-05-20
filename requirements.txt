@@ -1,0 +1,6 @@
+Django==4.2.1
+ShopifyAPI==12.3.0
+python-dotenv==1.0.0
+django-extensions==3.2.1
+Werkzeug==2.3.4
+pyOpenSSL==23.1.1
