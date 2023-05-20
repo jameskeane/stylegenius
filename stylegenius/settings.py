@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     "django_extensions",
 
     'shopify_app.apps.ShopifyAppConfig',
-    'home',
     'api',
 ]
 
