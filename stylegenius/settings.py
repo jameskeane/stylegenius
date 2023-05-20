@@ -16,6 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Load .env file for development
+# todo: with honcho this can be removed -- make sure to remove from requirements.txt
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-!-_op%hx_fy+&-n-m4@owox=tgiefjdq0vvki5wb9!40_9wp0%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dev.stylegeni.us']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     "django_extensions",
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -57,11 +60,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'stylegenius.urls'
-
+print(BASE_DIR)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.joinpath('app', 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,6 +119,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR.joinpath('app', 'build', 'static')]
+STATICFILES_STORAGE = (
+    'whitenoise.storage.CompressedManifestStaticFilesStorage')
+STATIC_ROOT = BASE_DIR.joinpath('static')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
