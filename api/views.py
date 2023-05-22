@@ -8,7 +8,7 @@ import shopify
 def products(request):
     products = shopify.Product.find()
 
-    return JsonResponse({'products': [p.to_dict() for p in products]})
+    return JsonResponse([p.to_dict() for p in products], safe=False)
 
 @session_token_required
 def orders(request):

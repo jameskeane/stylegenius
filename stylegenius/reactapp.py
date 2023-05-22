@@ -1,6 +1,7 @@
 # Load or proxy react app
 # Borrowed from: https://fractalideas.com/blog/making-react-and-django-play-well-together-hybrid-app-model/
 import urllib.request
+from urllib.error import HTTPError
 from django.conf import settings
 from django.template import engines
 from django.http import HttpResponse, StreamingHttpResponse
@@ -48,7 +49,11 @@ def catchall_dev(request, upstream='https://localhost:5000', *args, **kwargs):
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
-    response = urllib.request.urlopen(upstream_url, context=ctx)
+
+    try: 
+        response = urllib.request.urlopen(upstream_url, context=ctx)
+    except HTTPError as e:
+        return HttpResponse(status=e.code, reason=e.reason)
 
     content_type = response.getheader('Content-Type')
     if content_type.startswith('text/html'):
