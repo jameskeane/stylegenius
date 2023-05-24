@@ -3,6 +3,7 @@ from shopify_app.decorators import session_token_required
 
 import shopify
 import json
+import openai
 
 
 @session_token_required
@@ -21,6 +22,9 @@ def orders(request):
 @session_token_required
 def chat(request):
     messages = json.loads(request.body)
-    messages.append({ 'role': 'assistant', 'content': 'One sec...'})
+
+    chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)
+    messages.append(chat_completion.choices[0].message)
+    # messages.append({ 'role': 'assistant', 'content': 'One sec...'})
     return JsonResponse(messages, safe=False)
 

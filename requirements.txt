@@ -6,3 +6,4 @@ Werkzeug==2.3.4
 pyOpenSSL==23.1.1
 honcho==1.1.0
 whitenoise==6.4.0
+openai==0.27.7
