@@ -26,11 +26,12 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-!-_op%hx_fy+&-n-m4@owox=tgiefjdq0vvki5wb9!40_9wp0%'
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ALLOWED_HOSTS = ['dev.stylegeni.us', 'localhost']
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -47,6 +48,10 @@ INSTALLED_APPS = [
     'api',
 ]
 
+if DEBUG:
+    INSTALLED_APPS += ['django_rundbg']
+    DEBUG_PROPAGATE_EXCEPTIONS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -59,7 +64,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'stylegenius.urls'
-print(BASE_DIR)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

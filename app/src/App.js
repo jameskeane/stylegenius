@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import {Provider, Loading, useAppBridge} from '@shopify/app-bridge-react';
-import {AppProvider, Card} from '@shopify/polaris';
+import { Provider, Loading, useAppBridge } from '@shopify/app-bridge-react';
+import { AppProvider, Card } from '@shopify/polaris';
 import { authenticatedFetch } from "@shopify/app-bridge/utilities";
 import '@shopify/polaris/build/esm/styles.css';
+import { ChatFrame } from './ChatFrame.js';
 
 
 function useData(url) {
@@ -45,7 +46,8 @@ function App() {
         <Provider config={appConfig}>
           <Loading />
           <Card title="StyleGenius" sectioned>
-            <ProductListing />
+            {/*<ProductListing />*/}
+            <ChatFrame />
             {/*<p>View a summary of your online store.</p>*/}
           </Card>
         </Provider>

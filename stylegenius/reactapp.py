@@ -10,7 +10,7 @@ import ssl
 from shopify_app.decorators import known_shop_required, latest_access_scopes_required
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.apps import apps
-
+from django.middleware.csrf import get_token
 
 @xframe_options_exempt
 @known_shop_required
@@ -24,7 +24,7 @@ def render_html(request, response, *args, **kwargs):
             'app_config': {
                 "shopOrigin": kwargs.get("shopify_domain"),
                 "host": request.GET.get('host', kwargs.get("shopify_domain")),
-                "apiKey": apps.get_app_config("shopify_app").SHOPIFY_API_KEY,
+                "apiKey": apps.get_app_config("shopify_app").SHOPIFY_API_KEY
             }
         }),
         content_type=content_type,
@@ -42,6 +42,7 @@ def iter_response(response, chunk_size=65536):
             yield data
     finally:
         response.close()
+
 
 def catchall_dev(request, upstream='https://localhost:5000', *args, **kwargs):
     upstream_url = upstream + request.path
